@@ -1,0 +1,42 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://components/info/display.gd" type="Script" id=1]
+
+[node name="Label" type="HBoxContainer"]
+margin_right = 59.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Desc" type="Label" parent="."]
+margin_right = 35.0
+margin_bottom = 14.0
+size_flags_vertical = 1
+text = "Total:"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="S" type="HSplitContainer" parent="."]
+margin_left = 39.0
+margin_right = 39.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+dragger_visibility = 1
+
+[node name="Val" type="Label" parent="."]
+margin_left = 43.0
+margin_right = 59.0
+margin_bottom = 14.0
+size_flags_vertical = 1
+text = "25"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
