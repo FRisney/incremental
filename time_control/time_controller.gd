@@ -51,9 +51,10 @@ func tick_to_date(ticks:int) -> String:
 
 
 func _on_change_time_speed(type) -> void:
-	print(type)
 	match type:
 		false:
 			period_length = PERIOD_LEN_LONG
+			print("Play")
 		true:
 			period_length = 0
+			print("Pause")
