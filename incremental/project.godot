@@ -8,14 +8,9 @@
 
 config_version=4
 
-_global_script_classes=[ {
-"base": "Control",
-"class": "TimeController",
-"language": "GDScript",
-"path": "res://time_control/time_controller.gd"
-} ]
+_global_script_classes=[  ]
 _global_script_class_icons={
-"TimeController": ""
+
 }
 
 [application]
@@ -23,6 +18,11 @@ _global_script_class_icons={
 config/name="Incremental"
 run/main_scene="res://main.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+GameTimer="*res://managers/timer.gd"
+Storage="*res://managers/storage.gd"
 
 [debug]
 

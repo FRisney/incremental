@@ -19,7 +19,7 @@ items = {
 [node name="M" parent="." instance=ExtResource( 1 )]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 217.0
-margin_bottom = 222.0
+margin_right = 249.0
+margin_bottom = 274.0
 
 [editable path="M"]

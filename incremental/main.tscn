@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://time_control/slow.png" type="Texture" id=1]
 [ext_resource path="res://time_control/time_control.tscn" type="PackedScene" id=2]
 [ext_resource path="res://components/log.gd" type="Script" id=3]
 [ext_resource path="res://components/info/card_info.tscn" type="PackedScene" id=4]
+[ext_resource path="res://components/card/card.tscn" type="PackedScene" id=5]
+[ext_resource path="res://components/resource/resource_construct.tscn" type="PackedScene" id=6]
+
+[sub_resource type="ButtonGroup" id=1]
 
 [node name="BG" type="Panel"]
 anchor_right = 1.0
@@ -76,10 +80,10 @@ margin_right = -4.0
 margin_bottom = -4.0
 
 [node name="Grid" type="GridContainer" parent="HBoxContainer/Main/Dashboard"]
-margin_left = 648.0
-margin_top = 407.0
-margin_right = 872.0
-margin_bottom = 636.0
+margin_left = 632.0
+margin_top = 381.0
+margin_right = 888.0
+margin_bottom = 662.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -90,8 +94,8 @@ __meta__ = {
 }
 
 [node name="CardInfo" parent="HBoxContainer/Main/Dashboard/Grid" instance=ExtResource( 4 )]
-margin_right = 224.0
-margin_bottom = 229.0
+margin_right = 256.0
+margin_bottom = 281.0
 items = {
 "prop1": 2,
 "prop2": 3,
@@ -108,10 +112,10 @@ margin_right = -4.0
 margin_bottom = -4.0
 
 [node name="Grid2" type="GridContainer" parent="HBoxContainer/Main/Resources"]
-margin_left = 760.0
-margin_top = 522.0
-margin_right = 760.0
-margin_bottom = 522.0
+margin_left = 753.0
+margin_top = 515.0
+margin_right = 767.0
+margin_bottom = 529.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -120,3 +124,76 @@ columns = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Panel" type="PanelContainer" parent="HBoxContainer/Main/Resources/Grid2"]
+margin_right = 256.0
+margin_bottom = 281.0
+
+[node name="A" parent="HBoxContainer/Main/Resources/Grid2/Panel" instance=ExtResource( 5 )]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 249.0
+margin_bottom = 274.0
+
+[node name="Button" type="Button" parent="HBoxContainer/Main/Resources/Grid2/Panel/A/S/V" index="1"]
+margin_top = 29.0
+margin_right = 192.0
+margin_bottom = 49.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+group = SubResource( 1 )
+text = "Extract"
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Extractor" parent="HBoxContainer/Main/Resources/Grid2/Panel/A/S/V" index="2" instance=ExtResource( 6 )]
+margin_top = 64.0
+margin_right = 192.0
+margin_bottom = 84.0
+
+[node name="Main" parent="HBoxContainer/Main/Resources/Grid2/Panel/A/S/V/Extractor" index="0"]
+margin_right = 152.0
+group = SubResource( 1 )
+text = "Extractor [0]"
+
+[node name="Plus" parent="HBoxContainer/Main/Resources/Grid2/Panel/A/S/V/Extractor" index="1"]
+margin_left = 152.0
+margin_right = 172.0
+group = SubResource( 1 )
+
+[node name="Minus" parent="HBoxContainer/Main/Resources/Grid2/Panel/A/S/V/Extractor" index="2"]
+margin_left = 172.0
+margin_right = 192.0
+group = SubResource( 1 )
+
+[node name="Storage1" parent="HBoxContainer/Main/Resources/Grid2/Panel/A/S/V" index="3" instance=ExtResource( 6 )]
+margin_top = 99.0
+margin_right = 192.0
+margin_bottom = 119.0
+
+[node name="Main" parent="HBoxContainer/Main/Resources/Grid2/Panel/A/S/V/Storage1" index="0"]
+margin_right = 152.0
+group = SubResource( 1 )
+text = "Storage 1 [0]"
+
+[node name="Plus" parent="HBoxContainer/Main/Resources/Grid2/Panel/A/S/V/Storage1" index="1"]
+margin_left = 152.0
+margin_right = 172.0
+group = SubResource( 1 )
+
+[node name="Minus" parent="HBoxContainer/Main/Resources/Grid2/Panel/A/S/V/Storage1" index="2"]
+margin_left = 172.0
+margin_right = 192.0
+group = SubResource( 1 )
+
+[node name="Storage2" parent="HBoxContainer/Main/Resources/Grid2/Panel/A/S/V" index="4" instance=ExtResource( 6 )]
+margin_top = 134.0
+margin_right = 192.0
+margin_bottom = 154.0
+
+[editable path="HBoxContainer/Main/Resources/Grid2/Panel/A"]
+
+[editable path="HBoxContainer/Main/Resources/Grid2/Panel/A/S/V/Extractor"]
+
+[editable path="HBoxContainer/Main/Resources/Grid2/Panel/A/S/V/Storage1"]

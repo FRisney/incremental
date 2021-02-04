@@ -3,9 +3,9 @@
 [ext_resource path="res://components/card/card.gd" type="Script" id=2]
 
 [node name="M" type="MarginContainer"]
-margin_right = 210.0
-margin_bottom = 215.0
-rect_min_size = Vector2( 210, 215 )
+margin_right = 242.0
+margin_bottom = 267.0
+rect_min_size = Vector2( 242, 267 )
 mouse_filter = 2
 custom_constants/margin_right = 25
 custom_constants/margin_top = 32
@@ -21,19 +21,19 @@ __meta__ = {
 [node name="S" type="ScrollContainer" parent="."]
 margin_left = 25.0
 margin_top = 32.0
-margin_right = 185.0
-margin_bottom = 183.0
+margin_right = 217.0
+margin_bottom = 235.0
 
 [node name="V" type="VBoxContainer" parent="S"]
-margin_right = 160.0
-margin_bottom = 151.0
+margin_right = 192.0
+margin_bottom = 203.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 15
 
 [node name="T" type="Label" parent="S/V"]
-margin_right = 160.0
+margin_right = 192.0
 margin_bottom = 14.0
 text = "Title"
 align = 1
