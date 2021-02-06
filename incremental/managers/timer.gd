@@ -1,24 +1,17 @@
-extends Node
+extends Timer
 
-signal ticked()
-
-var increment = 1
-var period_length = 0.25
-var accumulator = -1
 var tick = 0
 
-func _process(delta) -> void:
-	if not period_length:
-		return
+func _ready():
+	wait_time = 0.25
+	autostart = false
+	one_shot = false
+	process_mode = TIMER_PROCESS_PHYSICS
+	print("signal: %s (%s)" % [name,GameTimer.connect("timeout", self, "_on_timeout")])
 
-	if accumulator < period_length:
-		accumulator += delta
-		return
 
-	accumulator = 0
-	tick += increment
-	emit_signal("ticked")
-	# display.text = tick_to_date(tick)
+func _on_timeout() -> void:
+	tick += 1
 
 
 func tick_to_date() -> String:
@@ -30,12 +23,3 @@ func tick_to_date() -> String:
 	ticks %= 32
 
 	return "%02d/%d/%d" % [++ticks,month,year]
-
-
-func _on_change_time_speed(state) -> void:
-	if (state):
-		period_length = 0
-		print("Pause")
-	else:
-		period_length = 0.25
-		print("Play")

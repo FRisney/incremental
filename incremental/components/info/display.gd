@@ -1,14 +1,13 @@
-extends Node
+extends Label
 
 
-var val:  String
-var desc: String
+export(String) var res_type
 
 
-func _ready():
-	display_values()
+func _ready() -> void:
+	print("signal: %s (%s)" % [name,GameTimer.connect("timeout", self, "update_text")])
 
 
-func display_values()-> void:
-	($Val as Label).text = val
-	($Desc as Label).text = desc
+func update_text():
+	text = "%s" % Storage.get(res_type)
+

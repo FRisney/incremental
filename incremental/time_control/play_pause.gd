@@ -5,4 +5,10 @@ func _ready() -> void:
 
 
 func _on_toggle(state:bool):
-	GameTimer._on_change_time_speed(state)
+	if GameTimer.is_stopped():
+		GameTimer.start()
+	elif state:
+		GameTimer.set_paused(true)
+	else:
+		GameTimer.set_paused(false)
+
