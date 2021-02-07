@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://time_control/slow.png" type="Texture" id=1]
 [ext_resource path="res://time_control/pause.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://components/info/display.gd" type="Script" id=5]
 [ext_resource path="res://time_control/play_pause.gd" type="Script" id=6]
 [ext_resource path="res://components/resource/card_resource.gd" type="Script" id=7]
+[ext_resource path="res://components/building.gd" type="Script" id=8]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -30,14 +31,7 @@ CheckBox/styles/hover_pressed = SubResource( 1 )
 CheckBox/styles/normal = SubResource( 1 )
 CheckBox/styles/pressed = SubResource( 1 )
 
-[node name="BG" type="Panel"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_constants/separation = 10
@@ -45,31 +39,32 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_right = 382.0
 margin_bottom = 1080.0
 size_flags_horizontal = 3
+alignment = 2
 
-[node name="TimeControl" type="MarginContainer" parent="HBoxContainer/VBoxContainer"]
+[node name="TimeControl" type="MarginContainer" parent="VBoxContainer"]
 margin_right = 382.0
 margin_bottom = 18.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Controls" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/TimeControl"]
+[node name="Controls" type="HBoxContainer" parent="VBoxContainer/TimeControl"]
 margin_right = 70.0
 margin_bottom = 18.0
 mouse_filter = 2
 size_flags_horizontal = 0
-size_flags_vertical = 7
+size_flags_vertical = 0
 theme = SubResource( 2 )
 custom_constants/separation = 10
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="P" type="TextureButton" parent="HBoxContainer/VBoxContainer/TimeControl/Controls"]
+[node name="P" type="TextureButton" parent="VBoxContainer/TimeControl/Controls"]
 margin_right = 18.0
 margin_bottom = 18.0
 grow_horizontal = 0
@@ -86,7 +81,7 @@ texture_pressed = ExtResource( 1 )
 stretch_mode = 5
 script = ExtResource( 6 )
 
-[node name="Display" type="Label" parent="HBoxContainer/VBoxContainer/TimeControl/Controls"]
+[node name="Display" type="Label" parent="VBoxContainer/TimeControl/Controls"]
 margin_left = 28.0
 margin_top = 2.0
 margin_right = 70.0
@@ -99,21 +94,23 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/VBoxContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer"]
 margin_top = 22.0
 margin_right = 382.0
 margin_bottom = 1052.0
+size_flags_horizontal = 3
 size_flags_vertical = 3
 bbcode_enabled = true
 scroll_following = true
 script = ExtResource( 3 )
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 1056.0
 margin_right = 382.0
 margin_bottom = 1080.0
+size_flags_horizontal = 3
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
 margin_right = 18.0
 margin_bottom = 24.0
 size_flags_horizontal = 5
@@ -121,13 +118,13 @@ size_flags_vertical = 5
 texture = ExtResource( 1 )
 stretch_mode = 6
 
-[node name="LineEdit" type="LineEdit" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer"]
 margin_left = 22.0
 margin_right = 382.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 
-[node name="Main" type="TabContainer" parent="HBoxContainer"]
+[node name="Main" type="TabContainer" parent="."]
 margin_left = 392.0
 margin_right = 1920.0
 margin_bottom = 1080.0
@@ -137,7 +134,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Resources" type="CenterContainer" parent="HBoxContainer/Main"]
+[node name="Resources" type="CenterContainer" parent="Main"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -145,7 +142,7 @@ margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
 
-[node name="Grid2" type="GridContainer" parent="HBoxContainer/Main/Resources"]
+[node name="Grid2" type="GridContainer" parent="Main/Resources"]
 margin_left = 516.0
 margin_top = 388.0
 margin_right = 1004.0
@@ -159,7 +156,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ResA" type="MarginContainer" parent="HBoxContainer/Main/Resources/Grid2"]
+[node name="ResA" type="MarginContainer" parent="Main/Resources/Grid2"]
 margin_right = 242.0
 margin_bottom = 267.0
 rect_min_size = Vector2( 242, 267 )
@@ -174,14 +171,14 @@ __meta__ = {
 "_edit_vertical_guides_": [  ]
 }
 
-[node name="Scroll" type="ScrollContainer" parent="HBoxContainer/Main/Resources/Grid2/ResA"]
+[node name="Scroll" type="ScrollContainer" parent="Main/Resources/Grid2/ResA"]
 margin_left = 25.0
 margin_top = 32.0
 margin_right = 217.0
 margin_bottom = 235.0
 scroll_horizontal_enabled = false
 
-[node name="VBox" type="VBoxContainer" parent="HBoxContainer/Main/Resources/Grid2/ResA/Scroll"]
+[node name="VBox" type="VBoxContainer" parent="Main/Resources/Grid2/ResA/Scroll"]
 margin_right = 192.0
 margin_bottom = 203.0
 mouse_filter = 2
@@ -189,26 +186,28 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 15
 
-[node name="Title" type="Label" parent="HBoxContainer/Main/Resources/Grid2/ResA/Scroll/VBox"]
+[node name="Title" type="Label" parent="Main/Resources/Grid2/ResA/Scroll/VBox"]
 margin_right = 192.0
 margin_bottom = 14.0
-text = "A"
+text = "Resource Title"
 align = 1
+script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Total" type="HBoxContainer" parent="HBoxContainer/Main/Resources/Grid2/ResA/Scroll/VBox"]
+[node name="Total" type="HBoxContainer" parent="Main/Resources/Grid2/ResA/Scroll/VBox"]
 margin_top = 29.0
 margin_right = 192.0
 margin_bottom = 43.0
+hint_tooltip = "consumption:		1/tk"
 mouse_filter = 0
 size_flags_horizontal = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Desc" type="Label" parent="HBoxContainer/Main/Resources/Grid2/ResA/Scroll/VBox/Total"]
+[node name="Desc" type="Label" parent="Main/Resources/Grid2/ResA/Scroll/VBox/Total"]
 margin_right = 35.0
 margin_bottom = 14.0
 size_flags_vertical = 1
@@ -219,14 +218,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HSplit" type="HSplitContainer" parent="HBoxContainer/Main/Resources/Grid2/ResA/Scroll/VBox/Total"]
+[node name="HSplit" type="HSplitContainer" parent="Main/Resources/Grid2/ResA/Scroll/VBox/Total"]
 margin_left = 39.0
 margin_right = 180.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 dragger_visibility = 1
 
-[node name="Val" type="Label" parent="HBoxContainer/Main/Resources/Grid2/ResA/Scroll/VBox/Total"]
+[node name="Val" type="Label" parent="Main/Resources/Grid2/ResA/Scroll/VBox/Total"]
 margin_left = 184.0
 margin_right = 192.0
 margin_bottom = 14.0
@@ -238,9 +237,9 @@ script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-res_type = "res_a"
+display_type = 1
 
-[node name="Extract" type="Button" parent="HBoxContainer/Main/Resources/Grid2/ResA/Scroll/VBox"]
+[node name="Extract" type="Button" parent="Main/Resources/Grid2/ResA/Scroll/VBox"]
 margin_top = 58.0
 margin_right = 192.0
 margin_bottom = 78.0
@@ -251,111 +250,25 @@ script = ExtResource( 7 )
 __meta__ = {
 "_editor_description_": ""
 }
-res_type = "res_a"
 
-[node name="Extractor" type="HBoxContainer" parent="HBoxContainer/Main/Resources/Grid2/ResA/Scroll/VBox"]
-visible = false
+[node name="Extrator" type="Button" parent="Main/Resources/Grid2/ResA/Scroll/VBox"]
 margin_top = 93.0
 margin_right = 192.0
 margin_bottom = 113.0
-size_flags_horizontal = 3
-custom_constants/separation = 0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Main" type="Button" parent="HBoxContainer/Main/Resources/Grid2/ResA/Scroll/VBox/Extractor"]
-margin_right = 152.0
-margin_bottom = 20.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 text = "Extractor [0]"
+script = ExtResource( 8 )
 
-[node name="Plus" type="Button" parent="HBoxContainer/Main/Resources/Grid2/ResA/Scroll/VBox/Extractor"]
-margin_left = 152.0
-margin_right = 172.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 20, 20 )
-mouse_default_cursor_shape = 2
-text = "+"
-
-[node name="Minus" type="Button" parent="HBoxContainer/Main/Resources/Grid2/ResA/Scroll/VBox/Extractor"]
-margin_left = 172.0
+[node name="Storage" type="Button" parent="Main/Resources/Grid2/ResA/Scroll/VBox"]
+margin_top = 128.0
 margin_right = 192.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 20, 20 )
-mouse_default_cursor_shape = 2
-text = "-"
-
-[node name="Storage1" type="HBoxContainer" parent="HBoxContainer/Main/Resources/Grid2/ResA/Scroll/VBox"]
-visible = false
-margin_top = 93.0
-margin_right = 192.0
-margin_bottom = 113.0
-size_flags_horizontal = 3
-custom_constants/separation = 0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Main" type="Button" parent="HBoxContainer/Main/Resources/Grid2/ResA/Scroll/VBox/Storage1"]
-margin_right = 152.0
-margin_bottom = 20.0
+margin_bottom = 148.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
-text = "Storage 1 [0]"
+text = "Storage [0]"
 
-[node name="Plus" type="Button" parent="HBoxContainer/Main/Resources/Grid2/ResA/Scroll/VBox/Storage1"]
-margin_left = 152.0
-margin_right = 172.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 20, 20 )
-mouse_default_cursor_shape = 2
-text = "+"
-
-[node name="Minus" type="Button" parent="HBoxContainer/Main/Resources/Grid2/ResA/Scroll/VBox/Storage1"]
-margin_left = 172.0
-margin_right = 192.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 20, 20 )
-mouse_default_cursor_shape = 2
-text = "-"
-
-[node name="Storage2" type="HBoxContainer" parent="HBoxContainer/Main/Resources/Grid2/ResA/Scroll/VBox"]
-visible = false
-margin_top = 93.0
-margin_right = 192.0
-margin_bottom = 113.0
-size_flags_horizontal = 3
-custom_constants/separation = 0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Main" type="Button" parent="HBoxContainer/Main/Resources/Grid2/ResA/Scroll/VBox/Storage2"]
-margin_right = 152.0
-margin_bottom = 20.0
-mouse_default_cursor_shape = 2
-size_flags_horizontal = 3
-text = "Storage 2 [0]"
-
-[node name="Plus" type="Button" parent="HBoxContainer/Main/Resources/Grid2/ResA/Scroll/VBox/Storage2"]
-margin_left = 152.0
-margin_right = 172.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 20, 20 )
-mouse_default_cursor_shape = 2
-text = "+"
-
-[node name="Minus" type="Button" parent="HBoxContainer/Main/Resources/Grid2/ResA/Scroll/VBox/Storage2"]
-margin_left = 172.0
-margin_right = 192.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 20, 20 )
-mouse_default_cursor_shape = 2
-text = "-"
-
-[node name="Info" type="MarginContainer" parent="HBoxContainer/Main/Resources/Grid2"]
+[node name="Info" type="MarginContainer" parent="Main/Resources/Grid2"]
 margin_left = 246.0
 margin_right = 488.0
 margin_bottom = 267.0
@@ -371,13 +284,13 @@ __meta__ = {
 "_edit_vertical_guides_": [  ]
 }
 
-[node name="S" type="ScrollContainer" parent="HBoxContainer/Main/Resources/Grid2/Info"]
+[node name="S" type="ScrollContainer" parent="Main/Resources/Grid2/Info"]
 margin_left = 25.0
 margin_top = 32.0
 margin_right = 217.0
 margin_bottom = 235.0
 
-[node name="V" type="VBoxContainer" parent="HBoxContainer/Main/Resources/Grid2/Info/S"]
+[node name="V" type="VBoxContainer" parent="Main/Resources/Grid2/Info/S"]
 margin_right = 192.0
 margin_bottom = 203.0
 mouse_filter = 2
@@ -385,7 +298,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 15
 
-[node name="T" type="Label" parent="HBoxContainer/Main/Resources/Grid2/Info/S/V"]
+[node name="T" type="Label" parent="Main/Resources/Grid2/Info/S/V"]
 margin_right = 192.0
 margin_bottom = 14.0
 text = "Title"
@@ -394,7 +307,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="HBoxContainer" parent="HBoxContainer/Main/Resources/Grid2/Info/S/V"]
+[node name="Label" type="HBoxContainer" parent="Main/Resources/Grid2/Info/S/V"]
 margin_top = 29.0
 margin_right = 192.0
 margin_bottom = 43.0
@@ -403,7 +316,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Desc" type="Label" parent="HBoxContainer/Main/Resources/Grid2/Info/S/V/Label"]
+[node name="Desc" type="Label" parent="Main/Resources/Grid2/Info/S/V/Label"]
 margin_right = 35.0
 margin_bottom = 14.0
 size_flags_vertical = 1
@@ -414,14 +327,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="S" type="HSplitContainer" parent="HBoxContainer/Main/Resources/Grid2/Info/S/V/Label"]
+[node name="S" type="HSplitContainer" parent="Main/Resources/Grid2/Info/S/V/Label"]
 margin_left = 39.0
 margin_right = 180.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 dragger_visibility = 1
 
-[node name="Val" type="Label" parent="HBoxContainer/Main/Resources/Grid2/Info/S/V/Label"]
+[node name="Val" type="Label" parent="Main/Resources/Grid2/Info/S/V/Label"]
 margin_left = 184.0
 margin_right = 192.0
 margin_bottom = 14.0
@@ -434,7 +347,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Population" type="CenterContainer" parent="HBoxContainer/Main"]
+[node name="Population" type="CenterContainer" parent="Main"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -443,7 +356,7 @@ margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
 
-[node name="Grid" type="GridContainer" parent="HBoxContainer/Main/Population"]
+[node name="Grid" type="GridContainer" parent="Main/Population"]
 margin_left = 760.0
 margin_top = 522.0
 margin_right = 760.0
@@ -457,7 +370,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Tech" type="CenterContainer" parent="HBoxContainer/Main"]
+[node name="Tech" type="CenterContainer" parent="Main"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -466,7 +379,7 @@ margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
 
-[node name="Grid" type="GridContainer" parent="HBoxContainer/Main/Tech"]
+[node name="Grid" type="GridContainer" parent="Main/Tech"]
 margin_left = 760.0
 margin_top = 522.0
 margin_right = 760.0

@@ -21,8 +21,10 @@ config/icon="res://icon.png"
 
 [autoload]
 
+Settings="*res://managers/settings.gd"
 GameTimer="*res://managers/timer.gd"
 Storage="*res://managers/storage.gd"
+Builder="*res://managers/builder.gd"
 
 [debug]
 
@@ -36,8 +38,7 @@ gdscript/warnings/unsafe_call_argument=true
 
 window/size/width=1920
 window/size/height=1080
-window/size/test_width=1366
-window/size/test_height=768
+window/dpi/allow_hidpi=true
 
 [rendering]
 

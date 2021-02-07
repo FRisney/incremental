@@ -1,13 +1,43 @@
 extends Node
 
-var res_a : int = 0
+const resources = {
+	Settings.Resources.A: {
+		'name': 'A',
+		'max': 100,
+		'current': 0,
+	},
 
-const resource_descriptor = {
-	"res_a": "A",
 }
 
+func get_res_name(res:int) -> String:
+	return resources[res].name
 
-func add_resource(res: String, inc: int = 1):
-	set(res, get(res)+inc)
-	print(get(res))
+func get_current(res: int) -> int:
+	if resources.has(res):
+		return resources[res].current
+	else:
+		return -1
 
+func get_max(res: int) -> int:
+	if resources.has(res):
+		return resources[res].max
+	else:
+		return -1
+
+func add_resource(res: int, inc: int = 1):
+	var rmax = resources[res].max
+	var current = resources[res].current
+
+	if rmax - current == 0:
+		pass
+
+	if rmax > current:
+		current += inc
+
+	if current > rmax:
+		current = rmax
+
+	resources[res].current = current
+
+func sub_resource(res: int, ammount: int):
+	resources[res].current -= ammount

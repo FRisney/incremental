@@ -1,6 +1,6 @@
 extends Button
 
-export(String) var res_type
+export(Settings.Resources) var res_type
 var accumulator:int = 0
 
 func _ready() -> void:
@@ -15,6 +15,4 @@ func _on_press():
 	if accumulator > 2:
 		return
 	Storage.add_resource(res_type, accumulator)
-# func display_content(data):
-
 
