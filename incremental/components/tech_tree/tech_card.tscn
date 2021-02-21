@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://components/tech_tree/tech.gd" type="Script" id=1]
+
+
+[node name="Tech2" type="Panel"]
+margin_left = 557.462
+margin_top = 143.936
+margin_right = 729.462
+margin_bottom = 312.936
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Unlock" type="Button" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "Unlock"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="Unlock" to="." method="_on_pressed"]

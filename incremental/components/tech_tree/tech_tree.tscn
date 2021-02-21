@@ -1,43 +1,103 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
 
-[node name="Tech" type="ScrollContainer"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_right = 0.00012207
-rect_min_size = Vector2( 1920, 1080 )
-__meta__ = {
-"_edit_lock_": true
-}
+[ext_resource path="res://components/tech_tree/tech_card.tscn" type="PackedScene" id=1]
 
-[node name="Control" type="Panel" parent="."]
-margin_right = 905.0
-margin_bottom = 677.0
-rect_min_size = Vector2( 905, 677 )
-
-[node name="Panel" type="Panel" parent="Control"]
-margin_right = 40.0
-margin_bottom = 40.0
+[node name="TechTree" type="Control"]
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Panel2" type="Panel" parent="Control"]
-margin_right = 40.0
-margin_bottom = 40.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Tech1" parent="." instance=ExtResource( 1 )]
+margin_left = 584.534
+margin_top = 8.03748
+margin_right = 756.534
+margin_bottom = 177.037
+tech_id = 1
 
-[node name="Panel3" type="Panel" parent="Control"]
-margin_right = 40.0
-margin_bottom = 40.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Tech2" parent="." instance=ExtResource( 1 )]
+margin_left = 797.365
+margin_top = 252.752
+margin_right = 969.368
+margin_bottom = 421.752
+tech_id = 2
+dependencies_path = [ NodePath("../Tech1") ]
 
-[node name="Panel4" type="Panel" parent="Control"]
-margin_right = 40.0
-margin_bottom = 40.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Tech3" parent="." instance=ExtResource( 1 )]
+margin_left = 360.275
+margin_top = 241.072
+margin_right = 532.275
+margin_bottom = 410.072
+tech_id = 3
+dependencies_path = [ NodePath("../Tech1") ]
+
+[node name="Tech4" parent="." instance=ExtResource( 1 )]
+margin_left = 984.23
+margin_top = 495.39
+margin_right = 1156.23
+margin_bottom = 664.391
+tech_id = 4
+dependencies_path = [ NodePath("../Tech2") ]
+
+[node name="Tech5" parent="." instance=ExtResource( 1 )]
+margin_left = 594.27
+margin_top = 503.019
+margin_right = 766.27
+margin_bottom = 672.019
+tech_id = 5
+dependencies_path = [ NodePath("../Tech2"), NodePath("../Tech3") ]
+
+[node name="Tech6" parent="." instance=ExtResource( 1 )]
+margin_left = 184.535
+margin_top = 479.587
+margin_right = 356.534
+margin_bottom = 648.589
+tech_id = 6
+dependencies_path = [ NodePath("../Tech3") ]
+
+[node name="Tech7" parent="." instance=ExtResource( 1 )]
+margin_left = 1118.57
+margin_top = 842.964
+margin_right = 1290.57
+margin_bottom = 1011.96
+tech_id = 7
+dependencies_path = [ NodePath("../Tech4") ]
+
+[node name="Tech8" parent="." instance=ExtResource( 1 )]
+margin_left = 759.371
+margin_top = 1096.69
+margin_right = 931.371
+margin_bottom = 1265.69
+tech_id = 8
+dependencies_path = [ NodePath("../Tech4"), NodePath("../Tech5"), NodePath("../Tech7") ]
+
+[node name="Tech9" parent="." instance=ExtResource( 1 )]
+margin_left = 345.632
+margin_top = 763.138
+margin_right = 517.632
+margin_bottom = 932.139
+tech_id = 9
+dependencies_path = [ NodePath("../Tech5"), NodePath("../Tech6") ]
+
+[node name="Tech10" parent="." instance=ExtResource( 1 )]
+margin_left = 4.95486
+margin_top = 828.392
+margin_right = 176.955
+margin_bottom = 997.392
+tech_id = 10
+dependencies_path = [ NodePath("../Tech6") ]
+
+[node name="Tech11" parent="." instance=ExtResource( 1 )]
+margin_left = 427.195
+margin_top = 1100.32
+margin_right = 599.195
+margin_bottom = 1269.32
+tech_id = 11
+dependencies_path = [ NodePath("../Tech9") ]
+
+[node name="Tech12" parent="." instance=ExtResource( 1 )]
+margin_left = 602.846
+margin_top = 1433.39
+margin_right = 774.846
+margin_bottom = 1602.39
+tech_id = 12
+dependencies_path = [ NodePath("../Tech11"), NodePath("../Tech8") ]

@@ -28,6 +28,7 @@ Builder="*res://managers/builder.gd"
 
 [debug]
 
+gdscript/warnings/return_value_discarded=false
 gdscript/warnings/integer_division=false
 gdscript/warnings/unsafe_property_access=true
 gdscript/warnings/unsafe_method_access=true
@@ -38,7 +39,8 @@ gdscript/warnings/unsafe_call_argument=true
 
 window/size/width=1920
 window/size/height=1080
-window/dpi/allow_hidpi=true
+window/size/test_width=1280
+window/size/test_height=720
 
 [rendering]
 
