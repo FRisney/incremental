@@ -1,13 +1,6 @@
 extends Node
 
-const resources = {
-	Settings.Resources.A: {
-		'name': 'A',
-		'max': 100,
-		'current': 0,
-	},
-
-}
+var resources: Dictionary
 
 func get_res_name(res:int) -> String:
 	return resources[res].name
@@ -25,8 +18,8 @@ func get_max(res: int) -> int:
 		return -1
 
 func add_resource(res: int, inc: int = 1):
-	var rmax = resources[res].max
-	var current = resources[res].current
+	var rmax = resources[res].get("res_max")
+	var current = resources[res].get("res_cur")
 
 	if rmax - current == 0:
 		pass
@@ -37,7 +30,7 @@ func add_resource(res: int, inc: int = 1):
 	if current > rmax:
 		current = rmax
 
-	resources[res].current = current
+	resources[res].set("res_cur",current)
 
 func sub_resource(res: int, ammount: int):
 	resources[res].current -= ammount

@@ -1,18 +1,38 @@
-extends Button
+extends Control
 
 export(Settings.Resources) var res_type
-var accumulator:int = 0
+export(int) var manual_extract = 0
+
+onready var title: Label = get_node("Scroll/VBox/Title")
+onready var res_qtt: Label = get_node("Scroll/VBox/Total/Val")
+
+var res_max:int = Settings.get("resource_base_capacity")[res_type]
+var res_cur: int = 0
 
 func _ready() -> void:
-	print("signal: %s (%s)" % [name,GameTimer.connect("timeout", self, "_on_tick")])
-	print("signal: %s (%s)" % [name,connect("pressed", self, "_on_press")])
+	if !manual_extract:
+		($Scroll/VBox/Extract as Button).visible = false
+	Storage.get("resources")[res_type] = self
+	title.text = Settings.get("resource_names")[res_type]
 
-func _on_tick():
-	accumulator = 0
 
-func _on_press():
-	accumulator += 1
-	if accumulator > 2:
-		return
-	Storage.add_resource(res_type, accumulator)
+func _process(_delta: float) -> void:
+	res_qtt.text = "%s" % res_cur
 
+func _on_extract():
+	print("resource_names")
+	if !GameTimer.is_stopped():
+		Storage.add_resource(res_type,manual_extract)
+		# if res_max - res_cur == 0:
+		# 	pass
+		# if res_max > res_cur:
+		# 	res_cur += 1
+		# if res_cur > res_max:
+		# 	res_cur = res_max
+
+func _on_build_extractor():
+	pass
+
+
+func _on_build_storage():
+	pass

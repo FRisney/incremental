@@ -24,7 +24,6 @@ config/icon="res://icon.png"
 Settings="*res://managers/settings.gd"
 GameTimer="*res://managers/timer.gd"
 Storage="*res://managers/storage.gd"
-Builder="*res://managers/builder.gd"
 
 [debug]
 

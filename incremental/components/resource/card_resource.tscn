@@ -1,41 +1,114 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://components/resource/card_resource.gd" type="Script" id=1]
+[ext_resource path="res://components/resource/card_resource.gd" type="Script" id=2]
 
-[node name="T" type="PanelContainer"]
-margin_right = 280.0
-margin_bottom = 286.0
-rect_min_size = Vector2( 280, 286 )
-size_flags_horizontal = 3
-size_flags_vertical = 3
-script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="M" type="MarginContainer" parent="."]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 273.0
-margin_bottom = 279.0
+[node name="ResA" type="MarginContainer"]
+margin_right = 242.0
+margin_bottom = 267.0
+rect_min_size = Vector2( 242, 267 )
 mouse_filter = 2
 custom_constants/margin_right = 25
 custom_constants/margin_top = 32
 custom_constants/margin_left = 25
 custom_constants/margin_bottom = 32
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_horizontal_guides_": [ 7.0 ],
+"_edit_use_anchors_": false,
+"_edit_vertical_guides_": [  ]
+}
+
+[node name="Scroll" type="ScrollContainer" parent="."]
+margin_left = 25.0
+margin_top = 32.0
+margin_right = 217.0
+margin_bottom = 235.0
+scroll_horizontal_enabled = false
+
+[node name="VBox" type="VBoxContainer" parent="Scroll"]
+margin_right = 192.0
+margin_bottom = 203.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 15
+
+[node name="Title" type="Label" parent="Scroll/VBox"]
+margin_right = 192.0
+margin_bottom = 14.0
+text = "Resource Title"
+align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="S" type="ScrollContainer" parent="M"]
-margin_left = 25.0
-margin_top = 32.0
-margin_right = 241.0
-margin_bottom = 240.0
-scroll_horizontal_enabled = false
-
-[node name="V" type="VBoxContainer" parent="M/S"]
-margin_right = 216.0
-margin_bottom = 68.0
-mouse_filter = 2
+[node name="Total" type="HBoxContainer" parent="Scroll/VBox"]
+margin_top = 29.0
+margin_right = 192.0
+margin_bottom = 43.0
+hint_tooltip = "consumption:		1/tk"
+mouse_filter = 0
 size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Desc" type="Label" parent="Scroll/VBox/Total"]
+margin_right = 35.0
+margin_bottom = 14.0
+size_flags_vertical = 1
+text = "Total:"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSplit" type="HSplitContainer" parent="Scroll/VBox/Total"]
+margin_left = 39.0
+margin_right = 180.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+dragger_visibility = 1
+
+[node name="Val" type="Label" parent="Scroll/VBox/Total"]
+margin_left = 184.0
+margin_right = 192.0
+margin_bottom = 14.0
+size_flags_vertical = 1
+text = "0"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Extract" type="Button" parent="Scroll/VBox"]
+margin_top = 58.0
+margin_right = 192.0
+margin_bottom = 78.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+text = "Extract"
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Extractor" type="Button" parent="Scroll/VBox"]
+margin_top = 93.0
+margin_right = 192.0
+margin_bottom = 113.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+text = "Extractor [0]"
+
+[node name="Storage" type="Button" parent="Scroll/VBox"]
+margin_top = 128.0
+margin_right = 192.0
+margin_bottom = 148.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+text = "Storage [0]"
+[connection signal="pressed" from="Scroll/VBox/Extract" to="." method="_on_extract"]
+[connection signal="pressed" from="Scroll/VBox/Extractor" to="." method="_on_build_extractor"]
+[connection signal="pressed" from="Scroll/VBox/Storage" to="." method="_on_build_storage"]
