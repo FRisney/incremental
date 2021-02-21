@@ -2,7 +2,6 @@
 
 [ext_resource path="res://components/tech_tree/tech.gd" type="Script" id=1]
 
-
 [node name="Tech2" type="Panel"]
 margin_left = 557.462
 margin_top = 143.936

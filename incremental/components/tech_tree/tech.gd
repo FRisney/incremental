@@ -14,6 +14,7 @@ export(bool) var done
 func _ready() -> void:
 	if dependencies_path.size() > 0:
 		($Unlock as Button).disabled = true
+		($Unlock as Button).mouse_default_cursor_shape = CURSOR_FORBIDDEN
 		for dep_path in dependencies_path:
 			var dep_node: Panel = get_node(dep_path)
 			dependencies.append(dep_node)
@@ -21,6 +22,7 @@ func _ready() -> void:
 			create_path(dep_node)
 	else:
 		locked = false
+		($Unlock as Button).mouse_default_cursor_shape = CURSOR_POINTING_HAND
 
 
 func _process(_delta: float) -> void:
@@ -62,10 +64,12 @@ func on_unlock(tech_unlocked):
 	if req == dependencies.size():
 		locked = false
 		($Unlock as Button).disabled = false
+		($Unlock as Button).mouse_default_cursor_shape = CURSOR_POINTING_HAND
 
 
 func _on_pressed() -> void:
 	done = true
 	($Unlock as Button).disabled = true
+	($Unlock as Button).mouse_default_cursor_shape = CURSOR_FORBIDDEN
 	emit_signal("tech_unlock",tech_id)
 
