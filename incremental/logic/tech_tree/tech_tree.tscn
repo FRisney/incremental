@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://components/tech_tree/tech_card.tscn" type="PackedScene" id=1]
+[ext_resource path="res://logic/tech_tree/tech_card.tscn" type="PackedScene" id=1]
 
 [node name="TechTree" type="Control"]
 __meta__ = {
@@ -71,9 +71,9 @@ tech_id = 8
 dependencies_path = [ NodePath("../Tech4"), NodePath("../Tech5"), NodePath("../Tech7") ]
 
 [node name="Tech9" parent="." instance=ExtResource( 1 )]
-margin_left = 345.632
+margin_left = 347.52
 margin_top = 763.138
-margin_right = 517.632
+margin_right = 519.52
 margin_bottom = 932.139
 tech_id = 9
 dependencies_path = [ NodePath("../Tech5"), NodePath("../Tech6") ]

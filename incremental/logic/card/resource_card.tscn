@@ -1,0 +1,128 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://logic/card/resource_card.gd" type="Script" id=2]
+
+[node name="ResA" type="MarginContainer"]
+margin_right = 242.0
+margin_bottom = 267.0
+rect_min_size = Vector2( 242, 267 )
+mouse_filter = 2
+custom_constants/margin_right = 25
+custom_constants/margin_top = 32
+custom_constants/margin_left = 25
+custom_constants/margin_bottom = 32
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_horizontal_guides_": [ 7.0 ],
+"_edit_use_anchors_": false,
+"_edit_vertical_guides_": [  ]
+}
+
+[node name="Scroll" type="ScrollContainer" parent="."]
+margin_left = 25.0
+margin_top = 32.0
+margin_right = 217.0
+margin_bottom = 235.0
+scroll_horizontal_enabled = false
+
+[node name="Stack" type="VBoxContainer" parent="Scroll"]
+margin_right = 192.0
+margin_bottom = 203.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 15
+
+[node name="Title" type="Label" parent="Scroll/Stack"]
+margin_right = 192.0
+margin_bottom = 14.0
+text = "Resource Title"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="QC" type="MarginContainer" parent="Scroll/Stack"]
+margin_top = 29.0
+margin_right = 192.0
+margin_bottom = 43.0
+
+[node name="ProgBar" type="ProgressBar" parent="Scroll/Stack/QC"]
+margin_right = 192.0
+margin_bottom = 14.0
+size_flags_vertical = 1
+value = 66.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MC" type="MarginContainer" parent="Scroll/Stack/QC"]
+margin_right = 192.0
+margin_bottom = 14.0
+custom_constants/margin_right = 8
+custom_constants/margin_left = 8
+
+[node name="Quantity" type="HBoxContainer" parent="Scroll/Stack/QC/MC"]
+margin_left = 8.0
+margin_right = 184.0
+margin_bottom = 14.0
+hint_tooltip = "consumption:		1/tk"
+mouse_filter = 0
+size_flags_horizontal = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Current" type="Label" parent="Scroll/Stack/QC/MC/Quantity"]
+margin_right = 8.0
+margin_bottom = 14.0
+size_flags_vertical = 1
+text = "0"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSplit" type="HSplitContainer" parent="Scroll/Stack/QC/MC/Quantity"]
+margin_left = 12.0
+margin_right = 164.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+split_offset = 1
+dragger_visibility = 1
+
+[node name="Capacity" type="Label" parent="Scroll/Stack/QC/MC/Quantity"]
+margin_left = 168.0
+margin_right = 176.0
+margin_bottom = 14.0
+size_flags_vertical = 1
+text = "0"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Extractors" type="VBoxContainer" parent="Scroll/Stack"]
+margin_top = 58.0
+margin_right = 192.0
+margin_bottom = 58.0
+mouse_filter = 2
+size_flags_horizontal = 3
+custom_constants/separation = 15
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Storages" type="VBoxContainer" parent="Scroll/Stack"]
+margin_top = 73.0
+margin_right = 192.0
+margin_bottom = 73.0
+mouse_filter = 2
+size_flags_horizontal = 3
+custom_constants/separation = 15
+__meta__ = {
+"_editor_description_": ""
+}

@@ -8,9 +8,20 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Resource",
+"class": "BuildingData",
+"language": "GDScript",
+"path": "res://logic/building.gd"
+}, {
+"base": "Resource",
+"class": "ResData",
+"language": "GDScript",
+"path": "res://logic/res_data.gd"
+} ]
 _global_script_class_icons={
-
+"BuildingData": "",
+"ResData": ""
 }
 
 [application]
@@ -23,8 +34,6 @@ config/icon="res://icon.png"
 
 Settings="*res://managers/settings.gd"
 GameTimer="*res://managers/timer.gd"
-Storage="*res://managers/storage.gd"
-Builder="*res://managers/builder.gd"
 
 [debug]
 
