@@ -2,11 +2,13 @@ extends Resource
 class_name ResData
 
 export(Array, Dictionary) var extractors # {
+	# 	id: int
 	# 	builded: int
 	# 	cost: string - math expr
 	# 	production: string - math expr
 	# }
 export(Array, Dictionary) var storages # {
+	# 	id: int
 	# 	builded: int
 	# 	cost: string - math expr
 	# 	stores: string - math expr

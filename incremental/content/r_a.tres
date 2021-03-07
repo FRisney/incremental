@@ -8,11 +8,23 @@ script = ExtResource( 2 )
 extractors = [ {
 "builded": 0,
 "cost": "ceil((pow(x,2))/0.4)",
+"id": 0,
+"production": "ceil((pow(x,2))/0.4)"
+}, {
+"builded": 0,
+"cost": "ceil((pow(x,2))/0.4)",
+"id": 1,
 "production": "ceil((pow(x,2))/0.4)"
 } ]
 storages = [ {
 "builded": 0,
 "cost": "ceil((pow(x,2))/0.4)",
+"id": 0,
+"stores": "ceil((pow(x,2))/0.4)"
+}, {
+"builded": 0,
+"cost": "ceil((pow(x,2))/0.4)",
+"id": 1,
 "stores": "ceil((pow(x,2))/0.4)"
 } ]
 type = "r_a"
