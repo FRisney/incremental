@@ -70,6 +70,6 @@ func on_unlock(tech_unlocked):
 func _on_pressed() -> void:
 	done = true
 	($Unlock as Button).disabled = true
-	($Unlock as Button).mouse_default_cursor_shape = CURSOR_FORBIDDEN
+	($Unlock as Button).mouse_default_cursor_shape = CURSOR_ARROW
 	emit_signal("tech_unlock",tech_id)
 

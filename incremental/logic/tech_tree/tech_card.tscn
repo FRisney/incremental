@@ -10,10 +10,6 @@ __meta__ = {
 "_edit_group_": true,
 "_edit_use_anchors_": false
 }
-tech_id = 0
-dependencies_path = [  ]
-locked = false
-done = false
 
 [node name="Unlock" type="Button" parent="."]
 anchor_right = 1.0

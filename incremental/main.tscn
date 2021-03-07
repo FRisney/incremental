@@ -204,13 +204,13 @@ usage = 0
 render_target_update_mode = 0
 
 [node name="TechTreeCam" type="Camera2D" parent="Main/Tech/Viewport"]
-position = Vector2( 760, 522 )
 current = true
 smoothing_enabled = true
 smoothing_speed = 20.0
 script = ExtResource( 10 )
-z_factor = 0.25
+z_factor = 0.2
 min_zoom = 0.7
-max_zoom = 2.2
+max_zoom = 4.0
+zoom_speed = 0.1
 
 [node name="TechTree" parent="Main/Tech/Viewport" instance=ExtResource( 9 )]

@@ -6,4 +6,5 @@ func _process(_delta: float) -> void:
 	if visible and mouse_pos.x > 0 and mouse_pos.y > 0:
 		($Viewport as Viewport).set("gui_disable_input", false)
 	else:
+		($Viewport/TechTreeCam as Camera2D).set("pressed",false)
 		($Viewport as Viewport).set("gui_disable_input", true)
