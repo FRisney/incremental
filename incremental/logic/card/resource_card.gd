@@ -1,31 +1,25 @@
 extends Control
 
-export(Settings.ResTypes) var res_type
+export var res_type: String
 
 onready var lbl_current: Label = get_node("Scroll/Stack/QC/MC/Quantity/Current")
 onready var lbl_capacity: Label = get_node("Scroll/Stack/QC/MC/Quantity/Capacity")
 onready var prog_bar: ProgressBar = get_node("Scroll/Stack/QC/ProgBar")
 
-var data:Dictionary = {
-	"capacity": 0,
-	"current": 0,
-	"extractors_builded": { },
-	"storages_builded": { },
-}
+var data:Dictionary = { }
 
 func _enter_tree() -> void:
 	data = Settings.call("get_persistent_resource_data", res_type)
 
 func _ready() -> void:
-	# load_data()
 	Settings.call("enlist",self.get_path())
-	(get_node("Scroll/Stack/Title") as Label).text = data.get("name")
+	# print("signal: %s (%s)" % [name,GameTimer.connect("endofyear", self, "save_state")])
+	(get_node("Scroll/Stack/Title") as Label).text = data.name
 	data.capacity = calc_capacity()
 	lbl_capacity.text = "%s" % data.capacity
 	prog_bar.max_value = data.capacity
 
-
-	if data.get("manual_extract") > 0:
+	if data.manual_extract > 0:
 		var btn:Button = Button.new()
 		btn.connect("pressed",self,"_on_extract")
 		btn.name = "Extract"
@@ -40,7 +34,7 @@ func _process(_delta: float) -> void:
 
 func _on_extract():
 	if !GameTimer.is_stopped():
-		var _e: int = data.current + data.get("manual_extract")
+		var _e: int = data.current + data.manual_extract
 		data.current = _e if _e < data.capacity else data.capacity
 
 
@@ -52,33 +46,6 @@ func _on_build_storage():
 	lbl_capacity.text = "%s" % data.capacity
 
 
-# func _on_save() -> void:
-# 	persistent_data.set("current", data.current)
-# 	persistent_data.set("capacity", data.capacity)
-# 	for extractor in data.extractors:
-# 		persistent_data.get("extractors")[extractor].set("builded", data[extractor].builded)
-# 	for storage in data.storages:
-# 		persistent_data.get("storages")[storage].set("builded", data[storage].builded)
-
-# func load_data():
-# 	data.capacity = persistent_data.get("capacity")
-# 	data.current = persistent_data.get("current")
-
-# 	var i:int=0
-# 	for extractor in persistent_data.get("extractors"):
-# 		# print(extractor)
-# 		# if !data.extractors_builded.has(i):
-# 		# 	data.extractors_builded[i] = 0;
-# 		data.extractors_builded[i] = persistent_data.get("extractors")[i].builded
-# 		i += 1
-
-# 	i = 0
-# 	for storage in persistent_data.get("storages"):
-# 		# if !data.storages_builded.has(i):
-# 		# 	data.storages_builded.append(i)
-# 		data.storages_builded[i] = persistent_data.get("storages")[i].builded
-# 		i += 1
-
 func calc_capacity() -> int:
 	var cap:int = 0
 	for storage in data.storages:
@@ -87,3 +54,10 @@ func calc_capacity() -> int:
 		cap += exp_cap.execute([storage.builded])
 	cap = cap if cap > data.capacity else data.capacity
 	return cap
+
+
+# func save_state() ->void:
+# 	if !Settings.get("data_buffer").has(res_type):
+# 		Settings.call("set_persistent_resource_data", res_type, data)
+# 	else:
+# 		Settings.get("data_buffer")[res_type] = data

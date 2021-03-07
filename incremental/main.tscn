@@ -158,6 +158,7 @@ __meta__ = {
 }
 
 [node name="ResA" parent="Main/Resources/Grid2" instance=ExtResource( 7 )]
+res_type = "r_a"
 
 [node name="Population" type="CenterContainer" parent="Main"]
 visible = false

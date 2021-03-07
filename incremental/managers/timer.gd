@@ -1,5 +1,7 @@
 extends Timer
 
+signal endofyear()
+
 var tick = 0
 
 func _ready():
@@ -15,6 +17,8 @@ func _on_timeout() -> void:
 
 
 func tick_to_date() -> String:
+	if tick % 256 == 0:
+		emit_signal("endofyear")
 	# the Year is 8 Months long, each Month is 32 Days long
 	var ticks:int = tick
 	var year:int = ticks/256
