@@ -7,23 +7,23 @@ onready var lbl_capacity: Label = get_node("Scroll/Stack/QC/MC/Quantity/Capacity
 onready var prog_bar: ProgressBar = get_node("Scroll/Stack/QC/ProgBar")
 
 var data:Dictionary = {
-	"capacity": 15,
+	"capacity": 0,
 	"current": 0,
 	"extractors_builded": { },
 	"storages_builded": { },
 }
 
 func _enter_tree() -> void:
-	data = Settings.call("get_persistent_data", res_type)
+	data = Settings.call("get_persistent_resource_data", res_type)
 
 func _ready() -> void:
 	# load_data()
 	Settings.call("enlist",self.get_path())
-	(get_node("Scroll/Stack/Title") as Label).text = data.get("resource_name")
-	lbl_capacity.text = "%s" % data.get("capacity")
-	prog_bar.max_value = data.get("capacity")
+	(get_node("Scroll/Stack/Title") as Label).text = data.get("name")
+	data.capacity = calc_capacity()
+	lbl_capacity.text = "%s" % data.capacity
+	prog_bar.max_value = data.capacity
 
-	
 
 	if data.get("manual_extract") > 0:
 		var btn:Button = Button.new()
@@ -78,3 +78,12 @@ func _on_build_storage():
 # 		# 	data.storages_builded.append(i)
 # 		data.storages_builded[i] = persistent_data.get("storages")[i].builded
 # 		i += 1
+
+func calc_capacity() -> int:
+	var cap:int = 0
+	for storage in data.storages:
+		var exp_cap = Expression.new()
+		exp_cap.parse(storage.stores, ["x"])
+		cap += exp_cap.execute([storage.builded])
+	cap = cap if cap > data.capacity else data.capacity
+	return cap

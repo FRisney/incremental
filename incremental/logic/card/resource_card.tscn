@@ -45,11 +45,12 @@ __meta__ = {
 [node name="QC" type="MarginContainer" parent="Scroll/Stack"]
 margin_top = 29.0
 margin_right = 192.0
-margin_bottom = 43.0
+margin_bottom = 49.0
 
 [node name="ProgBar" type="ProgressBar" parent="Scroll/Stack/QC"]
 margin_right = 192.0
-margin_bottom = 14.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 0, 20 )
 size_flags_vertical = 1
 value = 66.0
 percent_visible = false
@@ -59,24 +60,26 @@ __meta__ = {
 
 [node name="MC" type="MarginContainer" parent="Scroll/Stack/QC"]
 margin_right = 192.0
-margin_bottom = 14.0
+margin_bottom = 20.0
 custom_constants/margin_right = 8
 custom_constants/margin_left = 8
 
 [node name="Quantity" type="HBoxContainer" parent="Scroll/Stack/QC/MC"]
 margin_left = 8.0
 margin_right = 184.0
-margin_bottom = 14.0
+margin_bottom = 20.0
 hint_tooltip = "consumption:		1/tk"
 mouse_filter = 0
 size_flags_horizontal = 5
+alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Current" type="Label" parent="Scroll/Stack/QC/MC/Quantity"]
-margin_right = 8.0
-margin_bottom = 14.0
+margin_left = 78.0
+margin_right = 86.0
+margin_bottom = 20.0
 size_flags_vertical = 1
 text = "0"
 align = 1
@@ -86,17 +89,18 @@ __meta__ = {
 }
 
 [node name="HSplit" type="HSplitContainer" parent="Scroll/Stack/QC/MC/Quantity"]
+visible = false
 margin_left = 12.0
 margin_right = 164.0
-margin_bottom = 14.0
+margin_bottom = 20.0
 size_flags_horizontal = 3
 split_offset = 1
 dragger_visibility = 1
 
 [node name="Capacity" type="Label" parent="Scroll/Stack/QC/MC/Quantity"]
-margin_left = 168.0
-margin_right = 176.0
-margin_bottom = 14.0
+margin_left = 90.0
+margin_right = 98.0
+margin_bottom = 20.0
 size_flags_vertical = 1
 text = "0"
 align = 1
@@ -106,9 +110,9 @@ __meta__ = {
 }
 
 [node name="Extractors" type="VBoxContainer" parent="Scroll/Stack"]
-margin_top = 58.0
+margin_top = 64.0
 margin_right = 192.0
-margin_bottom = 58.0
+margin_bottom = 64.0
 mouse_filter = 2
 size_flags_horizontal = 3
 custom_constants/separation = 15
@@ -117,9 +121,9 @@ __meta__ = {
 }
 
 [node name="Storages" type="VBoxContainer" parent="Scroll/Stack"]
-margin_top = 73.0
+margin_top = 79.0
 margin_right = 192.0
-margin_bottom = 73.0
+margin_bottom = 79.0
 mouse_filter = 2
 size_flags_horizontal = 3
 custom_constants/separation = 15

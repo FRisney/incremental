@@ -1,28 +1,21 @@
-[gd_resource type="Resource" load_steps=5 format=2]
+[gd_resource type="Resource" load_steps=2 format=2]
 
-[ext_resource path="res://logic/building.gd" type="Script" id=1]
 [ext_resource path="res://logic/res_data.gd" type="Script" id=2]
-
-[sub_resource type="Resource" id=1]
-script = ExtResource( 1 )
-cost = "ceil((pow(x,2))/0.4)"
-production = "ceil((pow(x,2))/0.4)"
-storage = "0"
-builded = 3
-
-[sub_resource type="Resource" id=2]
-script = ExtResource( 1 )
-cost = "ceil((pow(x,2))/0.4)"
-production = "0"
-storage = "ceil((pow(x,2))/0.4)"
-builded = 2
 
 [resource]
 resource_name = "RES A"
 script = ExtResource( 2 )
-extractors = [ SubResource( 1 ) ]
-storages = [ SubResource( 2 ) ]
-type = null
-manual_extract = 0
+extractors = [ {
+"builded": 0,
+"cost": "ceil((pow(x,2))/0.4)",
+"production": "ceil((pow(x,2))/0.4)"
+} ]
+storages = [ {
+"builded": 0,
+"cost": "ceil((pow(x,2))/0.4)",
+"stores": "ceil((pow(x,2))/0.4)"
+} ]
+type = 0
+manual_extract = 1
 capacity = 15
 current = 0
