@@ -12,7 +12,7 @@ func _enter_tree() -> void:
 	data = Settings.call("get_persistent_resource_data", res_type)
 
 func _ready() -> void:
-	Settings.call("enlist",self.get_path())
+	Settings.call("enlist","res", self.get_path())
 	(get_node("Scroll/Stack/Title") as Label).text = data.name
 	data.capacity = calc_capacity()
 	lbl_capacity.text = "%s" % data.capacity

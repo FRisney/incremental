@@ -1,22 +1,24 @@
 extends Node
 
-var res_refs: PoolStringArray
+export(Array,NodePath) var res_refs
+export(Array,NodePath) var tech_refs
 var save: int = 1
 
-var data_buffer: Dictionary = {
-	"unlocked_techs": [
-		1,2,3,4,5,6,7,8,9,10,12
-	]
-}
+var data_buffer: Dictionary = { }
+
+
+func _init():
+	if !data_buffer.has("unlocked_techs"):
+		data_buffer.unlocked_techs = Array()
 
 
 func _ready() -> void:
 	print("signal: %s (%s)" % [name,GameTimer.connect("endofyear", self, "save_routine")])
 
 
-func enlist(path:NodePath):
-	res_refs.append(path)
-	# print(path)
+func enlist(type:String, path:NodePath):
+	get("%s_refs"%type).push_back(path)
+	# print("%s_refs - %s"%[type,path])
 
 
 func set_persistent_data() -> void:
@@ -40,7 +42,10 @@ func set_persistent_data() -> void:
 			}
 			file_name = dir.get_next()
 		dir.list_dir_end()
-	file.open_compressed(save_path,File.WRITE, File.COMPRESSION_ZSTD)
+	if !OS.is_debug_build():
+		file.open_compressed(save_path,File.WRITE, File.COMPRESSION_ZSTD)
+	else:
+		file.open(save_path,File.WRITE)
 	file.store_string(to_json(data_buffer))
 	file.close()
 
@@ -52,7 +57,10 @@ func set_persistent_resource_data(res_type:String, data:Dictionary) -> void:
 	if !file.file_exists(path):
 		set_persistent_data()
 
-	file.open_compressed(path,File.READ_WRITE, File.COMPRESSION_ZSTD)
+	if !OS.is_debug_build():
+		file.open_compressed(path,File.READ_WRITE, File.COMPRESSION_ZSTD)
+	else:
+		file.open(path,File.READ_WRITE)
 	var dict:Dictionary = parse_json(file.get_as_text())
 	dict[res_type] = data
 	file.store_string(to_json(dict))
@@ -66,7 +74,10 @@ func get_persistent_resource_data(res_type:String) -> Dictionary:
 	if !file.file_exists(path):
 		set_persistent_data()
 
-	file.open_compressed(path,File.READ, File.COMPRESSION_ZSTD)
+	if !OS.is_debug_build():
+		file.open_compressed(path,File.READ, File.COMPRESSION_ZSTD)
+	else:
+		file.open(path,File.READ)
 	var dict:Dictionary = parse_json(file.get_as_text())
 	file.close()
 	return dict[res_type]
