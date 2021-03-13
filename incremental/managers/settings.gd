@@ -89,4 +89,8 @@ func save_routine():
 		var data:Dictionary = node.get("data")
 		for key in data:
 			data_buffer[node.res_type] = data
+	for node_path in tech_refs:
+		var node = get_node(node_path)
+		if !data_buffer.unlocked_techs.has(node.get("tech_id")) and node.get("done"):
+			data_buffer.unlocked_techs.append(node.get("tech_id"))
 	set_persistent_data()
