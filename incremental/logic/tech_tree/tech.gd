@@ -20,7 +20,7 @@ func _ready() -> void:
 			if dep_node.get("done"):
 				req += 1
 			dependencies.append(dep_node)
-			print("signal: %s (%s)" % [name,dep_node.connect("tech_unlock", self, "on_unlock")])
+			dep_node.connect("tech_unlock", self, "on_unlock")
 			create_path(dep_node)
 
 		if req == dependencies.size():
@@ -28,7 +28,9 @@ func _ready() -> void:
 	else:
 		locked = false
 
-	if Settings.data_buffer.unlocked_techs.has(tech_id):
+
+	print(Settings.data_buffer.unlocked_techs.has(float(tech_id)))
+	if Settings.data_buffer.unlocked_techs.has(float(tech_id)):
 		print("unlocked %s" % tech_id)
 		done = true
 

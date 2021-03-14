@@ -8,8 +8,7 @@ var data_buffer: Dictionary = { }
 
 
 func _init():
-	if !data_buffer.has("unlocked_techs"):
-		data_buffer.unlocked_techs = Array()
+	load_data()
 
 
 func _ready() -> void:
@@ -22,7 +21,8 @@ func enlist(type:String, path:NodePath):
 
 
 func set_persistent_data() -> void:
-	var save_path:String = "user://save-%s.save" % Settings.save
+	var save_path:String = "user://save-%s.save" % save
+	print(save_path)
 	var file: File = File.new()
 	if !file.file_exists(save_path):
 		var dir: Directory = Directory.new()
@@ -30,12 +30,13 @@ func set_persistent_data() -> void:
 		dir.list_dir_begin(true,true)
 		var file_name = dir.get_next()
 		while file_name != "":
+			print(file_name)
 			var res: Resource = load("res://content/"+file_name)
 			var res_type:String = file_name.get_basename()
 			data_buffer[res_type] = {
 				"name": res.get("resource_name"),
-				"current": res.get("current"),
-				"capacity": res.get("capacity"),
+				"current": int(res.get("current")),
+				"capacity": int(res.get("capacity")),
 				"manual_extract": res.get("manual_extract"),
 				"extractors": res.get("extractors"),
 				"storages": res.get("storages"),
@@ -52,7 +53,7 @@ func set_persistent_data() -> void:
 
 func set_persistent_resource_data(res_type:String, data:Dictionary) -> void:
 	var path:String = ""
-	path = ("user://save-%s.save" % Settings.save)
+	path = ("user://save-%s.save" % save)
 	var file: File = File.new()
 	if !file.file_exists(path):
 		set_persistent_data()
@@ -68,8 +69,12 @@ func set_persistent_resource_data(res_type:String, data:Dictionary) -> void:
 
 
 func get_persistent_resource_data(res_type:String) -> Dictionary:
+	# var dict:Dictionary = parse_json(file.get_as_text())
+	return data_buffer[res_type]
+
+func load_data() -> void:
 	var path:String = ""
-	path = ("user://save-%s.save" % Settings.save)
+	path = ("user://save-%s.save" % save)
 	var file: File = File.new()
 	if !file.file_exists(path):
 		set_persistent_data()
@@ -78,9 +83,10 @@ func get_persistent_resource_data(res_type:String) -> Dictionary:
 		file.open_compressed(path,File.READ, File.COMPRESSION_ZSTD)
 	else:
 		file.open(path,File.READ)
-	var dict:Dictionary = parse_json(file.get_as_text())
+	data_buffer = parse_json(file.get_as_text())
+	if !data_buffer.has("unlocked_techs"):
+		data_buffer.unlocked_techs = []
 	file.close()
-	return dict[res_type]
 
 
 func save_routine():
