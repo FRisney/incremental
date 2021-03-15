@@ -43,6 +43,10 @@ func set_persistent_data() -> void:
 			}
 			file_name = dir.get_next()
 		dir.list_dir_end()
+		if !data_buffer.has("tick"):
+			data_buffer.tick = 0
+		if !data_buffer.has("unlocked_techs"):
+			data_buffer.unlocked_techs = []
 	if !OS.is_debug_build():
 		file.open_compressed(save_path,File.WRITE, File.COMPRESSION_ZSTD)
 	else:
@@ -84,8 +88,6 @@ func load_data() -> void:
 	else:
 		file.open(path,File.READ)
 	data_buffer = parse_json(file.get_as_text())
-	if !data_buffer.has("unlocked_techs"):
-		data_buffer.unlocked_techs = []
 	file.close()
 
 

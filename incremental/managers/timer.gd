@@ -5,6 +5,7 @@ signal endofyear()
 var tick = 0
 
 func _ready():
+	tick = int(Settings.data_buffer.tick)
 	wait_time = 0.25
 	autostart = false
 	one_shot = false
