@@ -95,8 +95,18 @@ func load_data() -> void:
 		file.open_compressed(path,File.READ, File.COMPRESSION_ZSTD)
 	else:
 		file.open(path,File.READ)
-	data_buffer = parse_json(file.get_as_text())
-	file.close()
+	var result = JSON.parse(file.get_as_text())
+	if result.error == ERR_PARSE_ERROR:
+		var file_path = file.get_path_absolute()
+		file.close()
+		var dir = Directory.new()
+		dir.open(file_path.get_base_dir())
+		dir.remove(file_path)
+		dir.close()
+		load_data()
+	else:
+		data_buffer = result.result
+		file.close()
 
 
 func save_routine():
