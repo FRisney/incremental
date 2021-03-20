@@ -45,6 +45,11 @@ func _input(event):
 
 
 	if event is InputEventMouseMotion and pressed:
-		new_pos = position - event.relative * zoom.x
-		if limits.has_point(new_pos):
-			position = new_pos
+		var horz_move:float = position.x - event.relative.x * zoom.x
+		var vert_move:float = position.y - event.relative.y * zoom.y
+		if limits.has_point(Vector2(horz_move, vert_move)):
+			position = Vector2(horz_move, vert_move)
+		elif limits.has_point(Vector2(horz_move, position.y)):
+			position = Vector2(horz_move, position.y)
+		elif limits.has_point(Vector2(position.x, vert_move)):
+			position = Vector2(position.x, vert_move)
