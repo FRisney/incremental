@@ -11,6 +11,7 @@ var data:Dictionary = { }
 func _enter_tree() -> void:
 	data = Settings.call("get_persistent_resource_data", res_type)
 
+
 func _ready() -> void:
 	Settings.call("enlist","res", res_type, self.get_path())
 	(get_node("Scroll/Stack/Title") as Label).text = data.name
@@ -29,14 +30,14 @@ func _ready() -> void:
 		var btn: Button = Button.new()
 		btn.name = "%s" % extractor.id
 		btn.text = "Extractor %s [%s]" % [ extractor.id, extractor.builded ]
-		print("signal: %s (%s)" % [name,btn.connect("pressed", self, "_on_build_extractor", [extractor.id,btn])])
+		btn.connect("pressed", self, "_on_build_extractor", [extractor.id,btn])
 		get_node("Scroll/Stack/Extractors").add_child(btn)
 
 	for storage in data.storages:
 		var btn: Button = Button.new()
 		btn.name = "%s" % storage.id
 		btn.text = "Storage %s [%s]" % [ storage.id, storage.builded ]
-		print("signal: %s (%s)" % [name,btn.connect("pressed", self, "_on_build_storage", [storage.id,btn])])
+		btn.connect("pressed", self, "_on_build_storage", [storage.id,btn])
 		get_node("Scroll/Stack/Storages").add_child(btn)
 
 

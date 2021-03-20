@@ -2,7 +2,7 @@ extends RichTextLabel
 
 
 func _ready() -> void:
-	print("signal: %s (%s)" % [name,GameTimer.connect("timeout", self, "_on_ticked")])
+	GameTimer.connect("timeout", self, "_on_ticked")
 
 
 func _on_ticked() -> void:

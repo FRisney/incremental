@@ -10,7 +10,7 @@ func _ready():
 	autostart = false
 	one_shot = false
 	process_mode = TIMER_PROCESS_PHYSICS
-	print("signal: %s (%s)" % [name,GameTimer.connect("timeout", self, "_on_timeout")])
+	GameTimer.connect("timeout", self, "_on_timeout")
 
 
 func _on_timeout() -> void:
@@ -27,4 +27,4 @@ func tick_to_date() -> String:
 	var month:int = ticks/32
 	ticks %= 32
 
-	return "%02d/%d/%d" % [++ticks,month,year]
+	return "%02d/%d/%d" % [ticks+1,month+1,year+1]

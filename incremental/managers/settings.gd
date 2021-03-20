@@ -12,7 +12,7 @@ func _init():
 
 
 func _ready() -> void:
-	print("signal: %s (%s)" % [name,GameTimer.connect("endofyear", self, "save_routine")])
+	GameTimer.connect("endofyear", self, "save_routine")
 
 
 func enlist(type:String, id:String, path:NodePath):
@@ -29,6 +29,7 @@ func get_res_current(type:String) -> Node:
 
 func unlock_tech(id:String) -> void:
 	data_buffer.get("unlocked_techs").append(id)
+
 
 func set_persistent_data() -> void:
 	var save_path:String = "user://save-%s.save" % save
@@ -85,6 +86,7 @@ func set_persistent_resource_data(res_type:String, data:Dictionary) -> void:
 func get_persistent_resource_data(res_type:String) -> Dictionary:
 	# var dict:Dictionary = parse_json(file.get_as_text())
 	return data_buffer[res_type]
+
 
 func load_data() -> void:
 	var path:String = ""
