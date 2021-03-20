@@ -1,7 +1,7 @@
 extends Node
 
-export(Array,NodePath) var res_refs
-export(Array,NodePath) var tech_refs
+export(Dictionary) var res_refs
+export(Dictionary) var tech_refs
 var save: int = 1
 
 var data_buffer: Dictionary = { }
@@ -15,10 +15,20 @@ func _ready() -> void:
 	print("signal: %s (%s)" % [name,GameTimer.connect("endofyear", self, "save_routine")])
 
 
-func enlist(type:String, path:NodePath):
-	get("%s_refs"%type).push_back(path)
-	# print("%s_refs - %s"%[type,path])
+func enlist(type:String, id:String, path:NodePath):
+	get("%s_refs"%type)[id] = path
 
+
+func get_node_by_ref(type:String, id:String) -> Node:
+	return get_node(get("%s_refs"%type)[id])
+
+
+func get_res_current(type:String) -> Node:
+	return get_node_by_ref('res', type).get("data").get("current")
+
+
+func unlock_tech(id:String) -> void:
+	data_buffer.get("unlocked_techs").append(id)
 
 func set_persistent_data() -> void:
 	var save_path:String = "user://save-%s.save" % save
@@ -92,13 +102,11 @@ func load_data() -> void:
 
 
 func save_routine():
-	for node_path in res_refs:
-		var node = get_node(node_path)
-		var data:Dictionary = node.get("data")
+	for res_type in res_refs:
+		var data:Dictionary = get_node(res_refs[res_type]).get("data")
 		for key in data:
-			data_buffer[node.res_type] = data
-	for node_path in tech_refs:
-		var node = get_node(node_path)
-		if !data_buffer.unlocked_techs.has(node.get("tech_id")) and node.get("done"):
-			data_buffer.unlocked_techs.append(node.get("tech_id"))
+			data_buffer[res_type] = data
+	for tech_id in tech_refs:
+		if !data_buffer.unlocked_techs.has(tech_id) and get_node(tech_refs[tech_id]).get("done"):
+			data_buffer.unlocked_techs.append(tech_id)
 	set_persistent_data()
