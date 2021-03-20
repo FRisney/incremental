@@ -24,7 +24,7 @@ func get_node_by_ref(type:String, id:String) -> Node:
 
 
 func get_res_current(type:String) -> Node:
-	return get_node_by_ref('res', type).get("data").get("current")
+	return get_node_by_ref('res', type).call("get_data").get("current")
 
 
 func unlock_tech(id:String) -> void:
@@ -33,7 +33,6 @@ func unlock_tech(id:String) -> void:
 
 func set_persistent_data() -> void:
 	var save_path:String = "user://save-%s.save" % save
-	print(save_path)
 	var file: File = File.new()
 	if !file.file_exists(save_path):
 		var dir: Directory = Directory.new()
@@ -41,7 +40,6 @@ func set_persistent_data() -> void:
 		dir.list_dir_begin(true,true)
 		var file_name = dir.get_next()
 		while file_name != "":
-			print(file_name)
 			var res: Resource = load("res://content/"+file_name)
 			var res_type:String = file_name.get_basename()
 			data_buffer[res_type] = {
@@ -54,10 +52,8 @@ func set_persistent_data() -> void:
 			}
 			file_name = dir.get_next()
 		dir.list_dir_end()
-		if !data_buffer.has("tick"):
-			data_buffer.tick = 0
-		if !data_buffer.has("unlocked_techs"):
-			data_buffer.unlocked_techs = []
+		data_buffer.tick = 0
+		data_buffer.unlocked_techs = []
 	if !OS.is_debug_build():
 		file.open_compressed(save_path,File.WRITE, File.COMPRESSION_ZSTD)
 	else:
@@ -104,8 +100,9 @@ func load_data() -> void:
 
 
 func save_routine():
+	data_buffer.tick = GameTimer.get("tick")
 	for res_type in res_refs:
-		var data:Dictionary = get_node(res_refs[res_type]).get("data")
+		var data:Dictionary = get_node(res_refs[res_type]).call("get_data")
 		for key in data:
 			data_buffer[res_type] = data
 	for tech_id in tech_refs:
