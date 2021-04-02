@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://logic/res_data.gd" type="Script" id=2]
+
+[resource]
+resource_name = "Research points"
+script = ExtResource( 2 )
+extractors = [  ]
+storages = [  ]
+type = "r_r"
+manual_extract = 0
+capacity = 15
+current = 0

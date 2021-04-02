@@ -183,7 +183,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Tech" type="ViewportContainer" parent="Main"]
+[node name="Tech" type="VBoxContainer" parent="Main"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -191,19 +191,45 @@ margin_left = 4.0
 margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
+custom_constants/separation = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="Main/Tech"]
+margin_right = 1520.0
+margin_bottom = 74.0
+custom_constants/margin_right = 30
+custom_constants/margin_top = 30
+custom_constants/margin_left = 30
+custom_constants/margin_bottom = 30
+
+[node name="Panel" type="HBoxContainer" parent="Main/Tech/MarginContainer"]
+margin_left = 30.0
+margin_top = 30.0
+margin_right = 1490.0
+margin_bottom = 44.0
+
+[node name="Label" type="Label" parent="Main/Tech/MarginContainer/Panel"]
+margin_right = 102.0
+margin_bottom = 14.0
+text = "Research points"
+
+[node name="VPContiner" type="ViewportContainer" parent="Main/Tech"]
+margin_top = 74.0
+margin_right = 1520.0
+margin_bottom = 1044.0
 mouse_filter = 1
+size_flags_vertical = 3
 stretch = true
 script = ExtResource( 11 )
 
-[node name="Viewport" type="Viewport" parent="Main/Tech"]
-size = Vector2( 1520, 1044 )
+[node name="Viewport" type="Viewport" parent="Main/Tech/VPContiner"]
+size = Vector2( 1520, 970 )
 own_world = true
 transparent_bg = true
 handle_input_locally = false
 usage = 0
 render_target_update_mode = 0
 
-[node name="TechTreeCam" type="Camera2D" parent="Main/Tech/Viewport"]
+[node name="TechTreeCam" type="Camera2D" parent="Main/Tech/VPContiner/Viewport"]
 current = true
 smoothing_enabled = true
 smoothing_speed = 20.0
@@ -213,4 +239,4 @@ min_zoom = 0.7
 max_zoom = 4.0
 zoom_speed = 0.1
 
-[node name="TechTree" parent="Main/Tech/Viewport" instance=ExtResource( 9 )]
+[node name="TechTree" parent="Main/Tech/VPContiner/Viewport" instance=ExtResource( 9 )]

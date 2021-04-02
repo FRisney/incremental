@@ -70,14 +70,10 @@ func update_button():
 		lk_but.mouse_default_cursor_shape = CURSOR_POINTING_HAND
 	
 
-func update_paths():
-	for dep in dependencies:
-		var line:Line2D = lines[dep.get("tech_id")]
-		if line == null:
-			create_path(dep)
-			continue
-		line.set_point_position(0,rect_size/2)
-		line.set_point_position(1,(dep.rect_size/2) + dep.rect_global_position - rect_global_position)
+# Line decorations when tech state changes
+# func update_paths():
+# 	for dep in dependencies:
+# 		var line:Line2D = lines[dep.get("tech_id")]
 
 
 func create_path(target: Panel):
@@ -85,11 +81,15 @@ func create_path(target: Panel):
 	line.name = "%s" % target.get("tech_id")
 	add_child(line)
 	line.z_as_relative = false
-	line.z_index = -1
+	line.z_index = 1
 	line.antialiased = true
 	line.default_color = Color("#25252a")
-	line.add_point(rect_size/2,0)
-	line.add_point((target.rect_size/2) + target.rect_global_position - rect_global_position)
+	var my_pos: Vector2 = Vector2( rect_size.x/2, 0 )
+	var target_pos: Vector2 = Vector2( target.rect_size.x/2 + target.rect_global_position.x - rect_global_position.x, target.rect_size.y + target.rect_global_position.y - rect_global_position.y ) 
+	line.add_point(my_pos,0)
+	line.add_point(Vector2(my_pos.x,(target_pos.y-my_pos.y)/2))
+	line.add_point(Vector2(target_pos.x,(target_pos.y-my_pos.y)/2))
+	line.add_point(target_pos)
 	lines[target.get("tech_id")] = line
 
 
