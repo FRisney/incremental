@@ -50,8 +50,12 @@ func _ready() -> void:
 	update_button()
 
 func _on_ticked():
-	if status != TECH_STATUS.DONE and !is_missing_dependencies() and !is_missing_resources():
+	if status != TECH_STATUS.DONE:
 		status = TECH_STATUS.AVAILABLE
+		if is_missing_resources():
+			status = TECH_STATUS.MISSING_RESOURCES
+		if is_missing_dependencies():
+			status = TECH_STATUS.MISSING_TECHS
 		update_button()
 
 func update_button():
@@ -102,6 +106,8 @@ func on_unlock(tech_unlocked):
 
 
 func _on_pressed() -> void:
+	for res in costs:
+		Settings.call('consume_resource', res, costs[res])
 	status = TECH_STATUS.DONE
 	Settings.call("unlock_tech",tech_id)
 	update_button()

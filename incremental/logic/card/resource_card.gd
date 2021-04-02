@@ -90,9 +90,14 @@ func _on_build_storage(storage:int,btn:Button):
 
 
 func calc_capacity() -> int:
-	var cap:int = 0
+	var new_cap:int = capacity
 	for storage in storages:
 		var exp_cap = Expression.new()
 		exp_cap.parse(storage.stores, ["x"])
-		cap += exp_cap.execute([storage.builded])
-	return cap
+		new_cap += exp_cap.execute([storage.builded])
+	return new_cap
+
+
+func consume_resource(amount:int) -> void:
+	current -= amount if current - amount >= 0 else 0
+
