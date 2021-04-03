@@ -6,6 +6,7 @@ onready var label: Label = $Panel/Label
 
 func _ready():
 	GameTimer.connect('timeout',self,'_on_ticked')
+	label.text = "Research Points: %d" % current
 
 
 func _on_ticked() -> void:

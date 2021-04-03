@@ -31,8 +31,8 @@ func unlock_tech(id:String) -> void:
 	data_buffer.get("unlocked_techs").append(id)
 
 
-func consume_resource(res:String, amount:int) -> void:
-	get_node_by_ref('res', res).call('consume_resource',amount)
+func decrease_resource(res:String, quantity:int) -> void:
+	get_node_by_ref('res', res).call('decrease_resource',quantity)
 
 
 func set_persistent_data() -> void:

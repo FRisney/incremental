@@ -107,7 +107,7 @@ func on_unlock(tech_unlocked):
 
 func _on_pressed() -> void:
 	for res in costs:
-		Settings.call('consume_resource', res, costs[res])
+		Settings.call('decrease_resource', res, costs[res])
 	status = TECH_STATUS.DONE
 	Settings.call("unlock_tech",tech_id)
 	update_button()

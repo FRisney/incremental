@@ -12,24 +12,25 @@ var extractors:Array = []
 
 
 func get_data() -> Dictionary:
-	var data: Dictionary = { }
-	data.name = name
-	data.capacity = capacity
-	data.current = current
-	data.manual_extract = manual_extract
-	data.storages = storages
-	data.extractors = extractors    
+	var data: Dictionary = {
+		"name": name,
+		"capacity": capacity,
+		"current": current,
+		"manual_extract": manual_extract,
+		"storages": storages,
+		"extractors": extractors,
+	}
 	return data
 
 
 func _enter_tree() -> void:
 	var data:Dictionary = Settings.call("get_persistent_resource_data", res_type)
-	res_name       = data.name
-	capacity       = data.capacity
-	current        = data.current
-	manual_extract = data.manual_extract
-	storages       = data.storages
-	extractors     = data.extractors    
+	res_name       = data.get('name')
+	capacity       = data.get('capacity')
+	current        = data.get('current')
+	manual_extract = data.get('manual_extract')
+	storages       = data.get('storages')
+	extractors     = data.get('extractors')
 
 func _ready() -> void:
 	Settings.call("enlist","res", res_type, self.get_path())
@@ -61,6 +62,10 @@ func calc_capacity() -> int:
 	return new_cap
 
 
-func consume_resource(amount:int) -> void:
-	current -= amount if current - amount >= 0 else 0
+func increase_resource(quantity:int) -> void:
+	current += quantity if current + quantity >= capacity else 0
+
+
+func decrease_resource(quantity:int) -> void:
+	current -= quantity if current - quantity >= 0 else 0
 
