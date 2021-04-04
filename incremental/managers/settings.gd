@@ -31,6 +31,14 @@ func unlock_tech(id:String) -> void:
 	data_buffer.get("unlocked_techs").append(id)
 
 
+func get_unlocked_techs() -> Array:
+	return data_buffer.get("unlocked_techs")
+
+
+func get_tick() -> int:
+	return int(data_buffer.get("tick"))
+
+
 func decrease_resource(res:String, quantity:int) -> void:
 	get_node_by_ref('res', res).call('decrease_resource',quantity)
 

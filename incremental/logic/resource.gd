@@ -1,4 +1,4 @@
-extends Control
+extends Node
 
 export var res_type: String
 

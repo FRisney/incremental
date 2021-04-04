@@ -41,7 +41,7 @@ func _ready() -> void:
 			dependencies.append(dep_node)
 			dep_node.connect("tech_unlocked", self, "on_unlock")
 			create_path(dep_node)
-	if Settings.data_buffer.unlocked_techs.has(tech_id):
+	if Settings.call("get_unlocked_techs").has(tech_id):
 		status = TECH_STATUS.DONE
 	if is_missing_resources():
 		status = TECH_STATUS.MISSING_RESOURCES
