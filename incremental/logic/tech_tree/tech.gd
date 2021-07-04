@@ -51,6 +51,9 @@ func _ready() -> void:
 
 func _on_ticked():
 	if status != TECH_STATUS.DONE:
+		if Settings.get_tick() % 5:
+			for r in req[1]:
+				print(r)
 		status = TECH_STATUS.AVAILABLE
 		if is_missing_resources():
 			status = TECH_STATUS.MISSING_RESOURCES
@@ -84,6 +87,7 @@ func create_path(target: Panel):
 	line.z_index = 1
 	line.antialiased = true
 	line.default_color = Color("#25252a")
+	line.joint_mode = Line2D.LINE_JOINT_ROUND
 	var my_pos: Vector2 = Vector2( rect_size.x/2, 0 )
 	var target_pos: Vector2 = Vector2( target.rect_size.x/2 + target.rect_global_position.x - rect_global_position.x, target.rect_size.y + target.rect_global_position.y - rect_global_position.y ) 
 	line.add_point(my_pos,0)
